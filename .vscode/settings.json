@@ -1,0 +1,4 @@
+{
+    "kiroAgent.configureMCP": "Disabled",
+    "jestrunner.jestCommand": "npm test"
+}
