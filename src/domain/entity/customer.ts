@@ -1,4 +1,7 @@
 import Address from "./address";
+import EventDispatcher from "../event/shared/event-dispatcher";
+import CustomerCreatedEvent from "../event/customer/customer-created.event";
+import CustomerAddressChangedEvent from "../event/customer/customer-address-changed.event";
 
 export default class Customer {
     private _id: string;
@@ -7,10 +10,23 @@ export default class Customer {
     private _active: boolean = false
     private _reawardsPoints: number = 0
 
+    private static eventDispatcher?: EventDispatcher;
+
+    static setEventDispatcher(dispatcher: EventDispatcher) {
+        Customer.eventDispatcher = dispatcher;
+    }
+    static getEventDispatcher(): EventDispatcher | undefined {
+        return Customer.eventDispatcher;
+    }
+
     constructor(id: string, name: string) {
         this._id = id
         this._name = name
         this.validate()
+
+        // Dispara evento de criação
+        const eventDispatcher = Customer.getEventDispatcher();
+        eventDispatcher?.notify(new CustomerCreatedEvent({ id, name }));
     }
 
     validate() {
@@ -42,6 +58,14 @@ export default class Customer {
 
     changeAddress(address: Address) {
         this._address = address
+        
+        // Dispara evento de alteração de endereço
+        const eventDispatcher = Customer.getEventDispatcher();
+        eventDispatcher?.notify(new CustomerAddressChangedEvent({
+            id: this._id,
+            name: this._name,
+            address: address.toString()
+        }));
     }
 
     get id(): string {
