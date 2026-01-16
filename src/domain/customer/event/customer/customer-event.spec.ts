@@ -3,7 +3,7 @@ import EnviaConsoleLog1Handler from "./handler/send-email-when-customer-is-creat
 import EnviaConsoleLog2Handler from "./handler/send-email-when-customer-is-created.handler-2";
 import EnviaConsoleLogHandler from "./handler/semd-email-when-customer-address-updated.handler";
 import Customer from "../../entity/customer";
-import Address from "../../entity/address";
+import Address from "../../value-object/address";
 
 describe("Customer Domain Events", () => {
   it("should call both handlers when customer is created", () => {
