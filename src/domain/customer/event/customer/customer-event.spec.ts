@@ -1,4 +1,4 @@
-import EventDispatcher from "../shared/event-dispatcher";
+import EventDispatcher from "../../../@shared/event/event-dispatcher";
 import EnviaConsoleLog1Handler from "./handler/send-email-when-customer-is-created.handler";
 import EnviaConsoleLog2Handler from "./handler/send-email-when-customer-is-created.handler-2";
 import EnviaConsoleLogHandler from "./handler/semd-email-when-customer-address-updated.handler";
